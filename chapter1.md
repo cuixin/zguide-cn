@@ -113,7 +113,7 @@ int main (void)
 }
 ```
 
-![1](https://github.com/haozu/zguide-cn/blob/master/images/chapter1_1.png)
+![1](./blob/master/images/chapter1_1.png)
 
 使用REQ-REP套接字发送和接受消息是需要遵循一定规律的。客户端首先使用zmq_send()发送消息，再用zmq_recv()接收，如此循环。如果打乱了这个顺序（如连续发送两次）则会报错。类似地，服务端必须先进行接收，后进行发送。
 
@@ -236,7 +236,7 @@ int main (void)
 
 这看起来是否太简单了？ZMQ就是这样一个东西，你往里加点儿料就能制作出一枚无穷能量的原子弹，用它来拯救世界吧！
 
-![2](https://github.com/haozu/zguide-cn/blob/master/images/chapter1_2.png)
+![2](./blob/master/images/chapter1_2.png)
 
 理论上你可以连接千万个客户端到这个服务端上，同时连接都没问题，程序仍会运作得很好。你可以尝试一下先打开客户端，再打开服务端，可以看到程序仍然会正常工作，想想这意味着什么。
 
@@ -262,7 +262,7 @@ socket.send ("Hello")
 
 实际发送的消息是：
 
-![3](https://github.com/haozu/zguide-cn/blob/master/images/chapter1_3.png)
+![3](./blob/master/images/chapter1_3.png)
 
 如果你从C语言中读取该消息，你会读到一个类似于字符串的内容，甚至它可能就是一个字符串（第六位在内存中正好是一个空字符），但是这并不合适。这样一来，客户端和服务端对字符串的定义就不统一了，你会得到一些奇怪的结果。
 
@@ -290,7 +290,7 @@ s_recv (void *socket) {
 
 这段代码我们会在日后的示例中使用，我们可以顺手写一个s_send()方法，并打包成一个.h文件供我们使用。
 
-这就诞生了zhelpers.h，一个供C语言使用的ZMQ功能函数库。它的源代码比较长，而且只对C语言程序员有用，你可以在闲暇时[看一看](https://github.com/imatix/zguide/blob/master/examples/C/zhelpers.h)。
+这就诞生了zhelpers.h，一个供C语言使用的ZMQ功能函数库。它的源代码比较长，而且只对C语言程序员有用，你可以在闲暇时[看一看](./blob/master/examples/C/zhelpers.h)。
 
 ### 获取版本号
 
@@ -360,7 +360,7 @@ int main (void)
 
 这项更新服务没有开始、没有结束，就像永不消失的电波一样。
 
-![4](https://github.com/haozu/zguide-cn/blobr/master/images/chapter1_4.png)
+![4](./blobr/master/images/chapter1_4.png)
 
 下面是客户端程序，它会接受发布者的消息，只处理特定邮编标注的信息，如纽约的邮编是10001:
 
@@ -511,7 +511,7 @@ int main (void)
 }
 ```
 
-![5](https://github.com/haozu/zguide-cn/blob/master/images/chapter1_5.png)
+![5](./blob/master/images/chapter1_5.png)
 
 下面是worker的代码，它接受信息并延迟指定的毫秒数，并发送执行完毕的信号：
 
@@ -628,7 +628,7 @@ Total elapsed time: 1018 msec
 
 * 结果收集器的PULL套接字会均匀地从worker处收集消息，这种机制称为_公平队列_：
 
-![6](https://github.com/haozu/zguide-cn/blob/master/images/chapter1_6.png)
+![6](./blob/master/images/chapter1_6.png)
 
 管道模式也会出现慢连接的情况，让人误以为PUSH套接字没有进行负载均衡。如果你的程序中某个worker接收到了更多的请求，那是因为它的PULL套接字连接得比较快，从而在别的worker连接之前获取了额外的消息。
 
